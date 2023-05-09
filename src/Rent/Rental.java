@@ -29,12 +29,13 @@ public class Rental extends javax.swing.JFrame {
       txtdue.setEnabled(false);
     }
     Connection con;
+
 PreparedStatement pst;
 PreparedStatement pst2;
 PreparedStatement pst3;
 PreparedStatement pst4;
-
 ResultSet rs;
+
 public void LoadCatid()
      {
         try {
@@ -49,9 +50,10 @@ public void LoadCatid()
             }
             
         } catch (ClassNotFoundException ex) {
-            Logger.getLogger(Rental.class.getName()).log(Level.SEVERE, null, ex);
+            //Logger.getLogger(Rental.class.getName()).log(Level.SEVERE, null, ex);
         } catch (SQLException ex) {
-            Logger.getLogger(Rental.class.getName()).log(Level.SEVERE, null, ex);
+            //Logger.getLogger(Rental.class.getName()).log(Level.SEVERE, null, ex);
+            ex.printStackTrace();
         }
     }  
 
@@ -259,14 +261,32 @@ public void LoadCatid()
         try {
              Class.forName("com.mysql.jdbc.Driver");
              con= DriverManager.getConnection("jdbc:mysql://kadija:Benjbara123&@localhost:3306/car_rental_db");
+                //OLD VERSION   
              
-                pst=con.prepareStatement("select * from carregistration where car_no=?");
+                //pst=con.prepareStatement("select * from carregistration where car_no=?");
+                //pst.setString(1, car_id);
+                 //ResultSet rs=pst.executeQuery();
+                 //if(rs.next()==false)
+                //{
+                  //JOptionPane.showMessageDialog(this,"car num Not found");
+                //}
+
+
+
+                pst = con.prepareStatement("select * from carregistration where make=? AND available='Yes'");
                 pst.setString(1, car_id);
-                 ResultSet rs=pst.executeQuery();
-                 if(rs.next()==false)
-                {
-                  JOptionPane.showMessageDialog(this,"car num Not found");
+                ResultSet rs = pst.executeQuery();
+
+                if (rs.next() == false) {
+                    txtcust_id.setEnabled(false);
+                    txtcustname.setEnabled(false);
+                    txtrental.setEnabled(false);
+                    txtdate.setEnabled(false);
+                    txtdue.setEnabled(false); 
+                    JOptionPane.showMessageDialog(this, "Car not found or not available");
+                    
                 }
+
                  else
                 {
                     String aval=rs.getString("available");
@@ -282,15 +302,24 @@ public void LoadCatid()
                         txtdue.setEnabled(true); 
                     
                     }
+
+                    else{
+                        txtcust_id.setEnabled(false);
+                        txtcustname.setEnabled(false);
+                        txtrental.setEnabled(false);
+                        txtdate.setEnabled(false);
+                        txtdue.setEnabled(false); 
+                    }
                                
                         
                         
                 }
            
         } catch (ClassNotFoundException ex) {
-            Logger.getLogger(Rental.class.getName()).log(Level.SEVERE, null, ex);
+            //Logger.getLogger(Rental.class.getName()).log(Level.SEVERE, null, ex);
         } catch (SQLException ex) {
-            Logger.getLogger(Rental.class.getName()).log(Level.SEVERE, null, ex);
+            //Logger.getLogger(Rental.class.getName()).log(Level.SEVERE, null, ex);
+            ex.printStackTrace();
         }
     }
 
@@ -304,7 +333,7 @@ public void LoadCatid()
             try {
                 Class.forName("com.mysql.jdbc.Driver");
                 con= DriverManager.getConnection("jdbc:mysql://kadija:Benjbara123&@localhost:3306/car_rental_db");
-                pst2=con.prepareStatement("select * from customer where cust_id=?");
+                pst2=con.prepareStatement("select * from customer where name=?");
                 pst2.setString(1,cust_id);
                 rs =pst2.executeQuery();
                  if(rs.next()==false)
@@ -319,9 +348,10 @@ public void LoadCatid()
                     
                 
             } catch (ClassNotFoundException ex) {
-                Logger.getLogger(Rental.class.getName()).log(Level.SEVERE, null, ex);
+                //Logger.getLogger(Rental.class.getName()).log(Level.SEVERE, null, ex);
             } catch (SQLException ex) {
-                Logger.getLogger(Rental.class.getName()).log(Level.SEVERE, null, ex);
+                //Logger.getLogger(Rental.class.getName()).log(Level.SEVERE, null, ex);
+                ex.printStackTrace();
             }
                 
                 
@@ -331,10 +361,10 @@ public void LoadCatid()
                 
             
         
-    }//GEN-LAST:event_txtcust_idKeyPressed
+    }
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {
+
         String car_id=combocarID.getSelectedItem().toString();
  
             String cust_id=txtcust_id.getText();
@@ -359,7 +389,7 @@ public void LoadCatid()
                     pst3.setString(5,due);
                     pst3.executeUpdate();
                     
-                    pst4=con.prepareStatement("update carregistration set available='No' where car_no=?");
+                    pst4=con.prepareStatement("update carregistration set available='No' where make=?");
                     pst4.setString(1,car_id);
                     pst4.executeUpdate();
                     
@@ -370,37 +400,24 @@ public void LoadCatid()
                 }
  
  catch (ClassNotFoundException ex) {
-            Logger.getLogger(Rental.class.getName()).log(Level.SEVERE, null, ex);}
+            //Logger.getLogger(Rental.class.getName()).log(Level.SEVERE, null, ex);
+        }
          catch (SQLException ex) {
-                Logger.getLogger(Rental.class.getName()).log(Level.SEVERE, null, ex);
- 
- 
- 
- 
- 
- 
+                //Logger.getLogger(Rental.class.getName()).log(Level.SEVERE, null, ex);
+                ex.printStackTrace();
     }
  
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }
 
-    private void txtcustnameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtcustnameActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtcustnameActionPerformed
+    private void txtcustnameActionPerformed(java.awt.event.ActionEvent evt) {
+       
+    }
 
-    private void jButton1KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jButton1KeyPressed
-        // TODO add your handling code here:
+    private void jButton1KeyPressed(java.awt.event.KeyEvent evt) {
  
-    }//GEN-LAST:event_jButton1KeyPressed
+    }
 
-    /**
-     * @param args the command line arguments
-     */
     public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
                 if ("Nimbus".equals(info.getName())) {
@@ -417,9 +434,6 @@ public void LoadCatid()
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
             java.util.logging.Logger.getLogger(Rental.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
-        //</editor-fold>
-
-        /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new Rental().setVisible(true);
@@ -427,7 +441,6 @@ public void LoadCatid()
         });
     }
 
-    // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JComboBox<String> combocarID;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
@@ -444,5 +457,4 @@ public void LoadCatid()
     private com.toedter.calendar.JDateChooser txtdate;
     private com.toedter.calendar.JDateChooser txtdue;
     private javax.swing.JTextField txtrental;
-    // End of variables declaration//GEN-END:variables
 }

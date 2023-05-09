@@ -100,7 +100,7 @@ PreparedStatement pst;
             }
         });
 
-        jButton4.setText("cancle");
+        jButton4.setText("Cancel");
         jButton4.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton4ActionPerformed(evt);
@@ -394,7 +394,7 @@ PreparedStatement pst;
        DefaultTableModel d1=(DefaultTableModel)jTable1.getModel();
        int selectIndex=jTable1.getSelectedRow();
        String id=d1.getValueAt(selectIndex,0).toString();
-       int dialogResult=JOptionPane.showConfirmDialog(this,"Do you want to delete the record","Waring",JOptionPane.YES_NO_OPTION);
+       int dialogResult=JOptionPane.showConfirmDialog(this,"Do you want to delete the record","Warning",JOptionPane.YES_NO_OPTION);
        if(dialogResult==JOptionPane.YES_OPTION)
        {
            try {

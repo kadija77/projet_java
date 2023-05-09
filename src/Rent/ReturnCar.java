@@ -52,7 +52,7 @@ ResultSet rs;
 
         jLabel1.setText("Car ID");
 
-        jLabel2.setText("Fine");
+        jLabel2.setText("End");
 
         jLabel3.setText("Customer ID");
 
@@ -73,7 +73,7 @@ ResultSet rs;
             }
         });
 
-        jButton2.setText("Cancle");
+        jButton2.setText("Cancel");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton2ActionPerformed(evt);
@@ -149,7 +149,7 @@ ResultSet rs;
 
             },
             new String [] {
-                "Cust ID", "Car Id", "Return Date", "Elapsed", "Fine"
+                "Cust ID", "Car Id", "Return Date", "Elapsed", "END"
             }
         ) {
             Class[] types = new Class [] {

@@ -84,7 +84,7 @@ PreparedStatement pst;
             }
         });
 
-        jButton4.setText("cancle");
+        jButton4.setText("Cancel");
         jButton4.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton4ActionPerformed(evt);
@@ -226,7 +226,8 @@ PreparedStatement pst;
                     v2.add(Rs.getString("name"));
                     v2.add(Rs.getString("address"));
                     v2.add(Rs.getString("mobile"));                    
-                }  
+                } 
+                 
                 df.addRow(v2);
             }
             
@@ -294,12 +295,13 @@ PreparedStatement pst;
             pst.setString(3,address);
             pst.setString(4,mobile); 
             pst.executeUpdate();
-            JOptionPane.showMessageDialog(this,"Customer Added..........");
-            
-                txtcustname.setText("");
-                txtmobile.setText("");
-                txtaddress.setText("");
 
+            JOptionPane.showMessageDialog(this,"Customer Added..........");
+
+                txtcustname.setText("");
+                txtaddress.setText("");
+                txtmobile.setText("");
+                
                 txtcustname.requestFocus();
                 autoID();
                 table_update();

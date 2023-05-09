@@ -131,7 +131,15 @@ public class Main extends javax.swing.JFrame {
 
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Main().setVisible(true);
+                Login login = new Login();
+                login.setVisible(true);
+                login.addWindowListener(new java.awt.event.WindowAdapter() {
+                    @Override
+                    public void windowClosed(java.awt.event.WindowEvent e) {
+                        // Display the main application window when the login window is closed
+                        //new Main().setVisible(true);
+                    }
+                });
             }
         });
     }
